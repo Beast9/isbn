@@ -13,18 +13,24 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+    var isbn: String! = ""
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
+        //navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(vistaBuscarISBN(_:)))
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        
+        if isbn != ""{
+            insertNewObject(isbn: isbn!)
         }
     }
 
@@ -38,13 +44,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(_ sender: Any) {
+    func vistaBuscarISBN(_ sender: Any)
+    {
+        performSegue(withIdentifier: "buscar", sender: self)
+    }
+    
+    func insertNewObject(isbn: String) {
         let context = self.fetchedResultsController.managedObjectContext
         let newEvent = Event(context: context)
-             
-        // If appropriate, configure the new managed object.
-        newEvent.timestamp = NSDate()
 
+        // If appropriate, configure the new managed object.
+        newEvent.timestamp = isbn
+        
+        
         // Save the context.
         do {
             try context.save()
@@ -68,6 +80,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+        
+    
+        
     }
 
     // MARK: - Table View

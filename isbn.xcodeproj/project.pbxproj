@@ -16,6 +16,7 @@
 		D94E61921EF0E10100895060 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D94E61901EF0E10100895060 /* LaunchScreen.storyboard */; };
 		D94E619D1EF0E10100895060 /* isbnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E619C1EF0E10100895060 /* isbnTests.swift */; };
 		D94E61A81EF0E10100895060 /* isbnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E61A71EF0E10100895060 /* isbnUITests.swift */; };
+		D9B3FC901EF7A79B0004AD72 /* buscarISBN.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B3FC8F1EF7A79B0004AD72 /* buscarISBN.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D94E61A31EF0E10100895060 /* isbnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = isbnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D94E61A71EF0E10100895060 /* isbnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isbnUITests.swift; sourceTree = "<group>"; };
 		D94E61A91EF0E10100895060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9B3FC8F1EF7A79B0004AD72 /* buscarISBN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = buscarISBN.swift; sourceTree = "<group>"; usesTabs = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				D94E61901EF0E10100895060 /* LaunchScreen.storyboard */,
 				D94E61931EF0E10100895060 /* Info.plist */,
 				D94E61841EF0E10100895060 /* isbn.xcdatamodeld */,
+				D9B3FC8F1EF7A79B0004AD72 /* buscarISBN.swift */,
 			);
 			path = isbn;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				D94E61831EF0E10100895060 /* AppDelegate.swift in Sources */,
 				D94E61861EF0E10100895060 /* isbn.xcdatamodeld in Sources */,
 				D94E61881EF0E10100895060 /* MasterViewController.swift in Sources */,
+				D9B3FC901EF7A79B0004AD72 /* buscarISBN.swift in Sources */,
 				D94E618A1EF0E10100895060 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,6 +517,7 @@
 				D94E61AE1EF0E10100895060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D94E61AF1EF0E10100895060 /* Build configuration list for PBXNativeTarget "isbnTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +526,7 @@
 				D94E61B11EF0E10100895060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D94E61B21EF0E10100895060 /* Build configuration list for PBXNativeTarget "isbnUITests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +535,7 @@
 				D94E61B41EF0E10100895060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

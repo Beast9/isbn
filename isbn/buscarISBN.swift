@@ -1,59 +1,62 @@
 //
-//  DetailViewController.swift
+//  buscarISBN.swift
 //  isbn
 //
-//  Created by Ian Arvizu on 13/06/17.
+//  Created by Ian Arvizu on 19/06/17.
 //  Copyright © 2017 Ian Arvizu. All rights reserved.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class buscarISBN: UIViewController {
 
-    
-    @IBOutlet weak var codigoISBN: UILabel!
-
-    @IBOutlet weak var tituloLibro: UILabel!
-    @IBOutlet weak var autoresLibro: UILabel!
-    @IBOutlet weak var portadaLibro: UIImageView!
-    
-    
+    @IBOutlet weak var etBuscar: UITextField!
+    @IBOutlet weak var etJson: UITextView!
+    @IBOutlet weak var ivPortada: UIImageView!
     var libro: String!
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = codigoISBN {
-                label.text = detail.timestamp!.description
-                libro = detail.timestamp!.description
-                cargarLibro()
-            }
-        }
-    }
-
+    var isbn: String? = nil
+    var bandera: Bool? = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        configureView()
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
-    var detailItem: Event? {
-        didSet {
-            // Update the view.
-            configureView()
+  
+    @IBAction func btnBuscar(_ sender: Any) {
+        if (self.etBuscar.text != "")
+        {
+            llamadaAsincrona()
         }
+        else
+        {
+            self.showAlertMessage(title: "Advertencia", message: "Por favor digite el ISBN a buscar", owner: self)
+            
+            return
+        }
+    }
+    
+    func showAlertMessage (title: String, message: String, owner:UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{ (ACTION :UIAlertAction!)in
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        self.bandera = false
     }
 
     
-    
-    func cargarLibro() {
+    func llamadaAsincrona() {
         let config = URLSessionConfiguration.default // Session Configuration
         let session = URLSession(configuration: config) // Load configuration into Session
+        libro = etBuscar.text
         let url = URL(string: "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:"+libro)!
         
         
@@ -70,6 +73,8 @@ class DetailViewController: UIViewController {
                 alert.addAction(cancelar)
                 
                 self.present(alert, animated: true)
+                
+                self.bandera = false
                 
             }
             else
@@ -97,7 +102,7 @@ class DetailViewController: UIViewController {
                                     let discoPortada = cover["medium"] as! NSString? as String?
                                     let imagen = URL(string: discoPortada!)
                                     let dataImage = try? Data(contentsOf: imagen!)
-                                    self.portadaLibro.image = UIImage(data: dataImage!)
+                                    self.ivPortada.image = UIImage(data: dataImage!)
                                     
                                 }
                                 
@@ -112,10 +117,13 @@ class DetailViewController: UIViewController {
                                     
                                 }
                                 
+                                self.etJson.text = "TITULO: \n"
+                                self.etJson.text = self.etJson.text + titulo+"\n\n"
                                 
-                                self.tituloLibro.text = titulo
+                                self.etJson.text = self.etJson.text + "AUTORES: \n"
+                                self.etJson.text = self.etJson.text + autores
                                 
-                                self.autoresLibro.text = autores
+                                self.bandera = true
                             }
                             
                         }
@@ -129,6 +137,8 @@ class DetailViewController: UIViewController {
                             alert.addAction(cancelar)
                             
                             self.present(alert, animated: true)
+                            
+                            self.bandera = false
                             
                         }
                         
@@ -145,5 +155,22 @@ class DetailViewController: UIViewController {
         
     }
 
-}
+    
+    @IBAction func addButton(_ sender: Any) {
+        performSegue(withIdentifier: "agregar", sender: self)
+        
+    }
+    
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "agregar" {
+
+            let controller = segue.destination as! MasterViewController
+            controller.isbn = isbn
+        }
+    }
+    
+
+}
