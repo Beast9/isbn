@@ -32,6 +32,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if isbn != ""{
             insertNewObject(isbn: isbn!)
         }
+        else
+        {
+            insertNewObject(isbn: "9788426816382")
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +123,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                fatalError("Error \(nserror), \(nserror.userInfo)")
             }
         }
     }
