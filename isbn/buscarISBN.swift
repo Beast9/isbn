@@ -124,6 +124,7 @@ class buscarISBN: UIViewController {
                                 self.etJson.text = self.etJson.text + autores
                                 
                                 self.bandera = true
+                                self.isbn = self.libro
                             }
                             
                         }

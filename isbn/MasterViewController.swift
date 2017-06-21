@@ -14,7 +14,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
-    var isbn: String! = ""
+    var isbn: String! = "9788426816382"
 
 
     override func viewDidLoad() {
@@ -32,10 +32,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if isbn != ""{
             insertNewObject(isbn: isbn!)
         }
-        else
-        {
-            insertNewObject(isbn: "9788426816382")
-        }
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
